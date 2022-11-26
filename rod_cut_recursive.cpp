@@ -1,29 +1,23 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<bits/stdc++.h>
+#include <iostream>
+using namespace std;
 
-int cut_rod_recursive(int profit[],int n){
-    if(n==0)
-    return 0;
-    int max_rev=profit[n];
-    for (int i = 1; i < n; i++)
+int max(int a,int b){
+    return a>b?a:b;
+}
+int rod_cut_recursive(int profit[], int n)
+{
+    int max_rev = profit[n];
+    if (n > 0)
     {
-        int rec_val=cut_rod_recursive(profit,n-i);
-        if(max_rev<profit[i]+rec_val)
-        max_rev=profit[i]+rec_val;
+        for (int i = 1; i < n; i++)
+        {
+            max_rev=max(max_rev,profit[i]+rod_cut_recursive[profit,n-i]);        
+        }
     }
     return max_rev;
 }
 int main()
 {
-    int n;
-    printf("Enter the number of Profir\n");
-    scanf("%d", &n);
-    int profit[n];
-    for (int i = 0; i < n; i++)
-    {
-        scanf("%d", &profit[i]);
-    }
-    int ans=cut_rod_recursive(profit,n);
-    printf("%d",ans);
 
 }
