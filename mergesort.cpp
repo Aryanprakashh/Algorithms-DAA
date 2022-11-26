@@ -1,4 +1,4 @@
-#include <iostream>
+        #include <iostream>
 using namespace std;
 void merge(int arr[], int lb, int mid, int ub)
 {
@@ -57,7 +57,7 @@ void mergesort(int arr[],int lb,int ub){
 int main()
 {
     int n;
-    cout<<"Enter size of array\n";
+    // cout<<"Enter size of array\n";
     cin>>n;
     int arr[n];
     for (int i = 0; i < n; i++)
@@ -65,6 +65,7 @@ int main()
         cin>>arr[i];
     }
     mergesort(arr,0,n-1);
+    cout<<"Printing"<<endl;
     for (int i = 0; i < n; i++)
     {
         cout<<arr[i]<<" ";
