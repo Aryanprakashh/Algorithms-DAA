@@ -1,6 +1,7 @@
 // implement postfix to infix usign stack
-
-#include <stdio.h>
+#include<iostream>
+#include<stdlib.h>
+using namespace std;
 
 struct node
 {
@@ -10,7 +11,7 @@ struct node
 
 void push(struct node *ptr, char c)
 {
-    struct node *temp = malloc(sizeof(struct node));
+    struct node *temp = (struct node*)malloc(sizeof(struct node));
     if (temp == NULL)
     {
         printf("Stack Overflow\n");
@@ -70,6 +71,14 @@ int operand(char c)
 
 int main()
 {
-
+    string s;
+    cin>>s;
+    for (int i = 0; i < s.length(); i++)
+    {
+        if(isoperator(s[i])){
+            push(s[i]);
+        }
+    }
+    
     
 }
