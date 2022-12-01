@@ -1,15 +1,11 @@
-void insert(gnode *graph[], int i, int adj)
-{
-    gnode *temp = (gnode *)malloc(sizeof(gnode));
-
-    temp->vertex = adj;
-    temp->next;
-
-    if (graph == NULL){
-        graph[i] = temp;
-    }
-    else{
-        temp->next = graph[i];
-        graph[i] = temp;
-    }
-}
+5 10
+1 2 6
+1 5 7
+2 5 8
+2 3 5
+2 4 -4
+3 2 -2
+4 3 7
+4 1 2
+5 4 9
+5 3 -3

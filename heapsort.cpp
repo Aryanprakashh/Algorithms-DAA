@@ -63,6 +63,7 @@ int main()
 
     // heap sorting
     heapsort(arr, n);
+    cout<<"Array After Sorting\n";
     for (int i = 1; i <= n; i++)
     {
         cout << arr[i] << " ";

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 // 2*i is left child
 // 2*i+1 is right child
+// for a node i it has its parent at [i/2]
 void swap(int *x, int *y)
 {
     int temp = *x;
@@ -16,12 +17,12 @@ void heapify(int arr[], int n, int i)
     if (left <= n && (arr[left] > arr[root] && arr[left] >= arr[right]))
     {
         swap(&arr[root], &arr[left]);
-        heapify(arr, n, 2 * i);
+        heapify(arr, n,left);
     }
         else if (right <= n && arr[right] > arr[root])
     {
         swap(&arr[right], &arr[root]);
-        heapify(arr, n, 2 * i + 1);
+        heapify(arr, n, right);
     }
     else
         return;
@@ -60,6 +61,7 @@ int main()
     }
 
     heapsort(arr, n);
+    swap(&arr[1],&arr[2]);
     for (int i = 1; i <= n; i++)
     {
         printf("%d ", arr[i]);

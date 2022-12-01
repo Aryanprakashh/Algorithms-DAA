@@ -18,6 +18,41 @@ int pop()
     return stack[top--];
 }
 
+typedef struct queuee{
+    int size;
+    int top;
+    int *arr;
+}queuee;
+
+queuee* queue_create(int size){
+    queuee* q=(queuee*)calloc(1,sizeof(queuee));
+    q->arr=(int*)calloc(size,sizeof(int));
+    // q->size=0;
+    // q->top=0;
+    return q;
+}
+
+void popq(queuee* q){
+    (q->top)++;
+    (q->top)=(q->top)%100;
+    (q->size)--;
+}
+
+void pushq(queuee* q,int a){
+    (q->size)++;
+    (q->arr)[((q->top)+(q->size)-1)%100]=a;
+}
+
+int isemptyq(queuee* q){
+    return ((q->size)==0?1:0);
+}
+
+int frontq(queuee* q){
+    if(isemptyq(q))
+        return INT_MIN;
+    return (q->arr)[(q->top)];
+}
+
 typedef struct gnode
 {
     int vertex;
@@ -87,6 +122,42 @@ void DFS_toposort(gnode *graph[], int n)
         DFS_toposort_visit(graph, i, trav_status);
     }
 }
+void BFS_visit(gnode* graph[],int parent[],int trav_status[],int i,queuee* q){
+    // printf("**%d\n",empty(q));
+    pushq(q,i);
+    // printf("%d\n",front(q));
+    trav_status[i]=1;
+    parent[i]=-1;;
+    while(!isemptyq(q)){
+        int a=frontq(q);
+        printf("%d ",a);
+        popq(q);
+        gnode* temp=graph[a];
+        while(temp!=NULL){
+            if(trav_status[temp->vertex]==0){
+                parent[temp->vertex]=a;
+                pushq(q,temp->vertex);
+                trav_status[temp->vertex]=1;
+            }
+            temp=temp->next;
+        }
+    }
+}
+void BFS(gnode* graph[],int n){
+    int trav_status[n];
+    int parent[n];
+    struct queuee *q=queue_create(50);
+    for(int i=1;i<n;i++){
+        trav_status[i]=0;
+        parent[i]=-1;
+    }
+    for(int i=1;i<n;i++){
+        if(trav_status[i]==0){
+            BFS_visit(graph,parent,trav_status,i,q);
+        }
+    }
+}
+
 void insert(gnode *graph[], int i, int adj)
 {
     gnode *temp = (gnode *)malloc(sizeof(gnode));
@@ -123,7 +194,20 @@ void read_vertices_at_once(gnode *graph[], int n)
         } while (1);
     }
 }
-
+void print_edge(gnode *graph[], int n)
+{
+    for (int i = 1; i < n; i++)
+    {
+        printf("Adjacent of Vertex %d --> ", i);
+        gnode *temp = graph[i];
+        while (temp != NULL)
+        {
+            printf("%d ", temp->vertex);
+            temp = temp->next;
+        }
+    printf("\n");
+    }
+}
 void read_adjanceny_list(gnode *graph[], int n)
 {
     int val;
@@ -170,8 +254,8 @@ int vertex_having_max_edge(gnode *list[], int n)
     return ver;
 }
 
-void highest_outgoing_edge(gnode *graph[], int n)
-{     
+int highest_outgoing_edge(gnode *graph[], int n)
+{
     int count = 0;
     int max = 0;
     int vertex = 0;
@@ -213,9 +297,9 @@ int highest_incoming_edge(gnode *graph[], int n)
 
     for (int i = 1; i < n; i++)
     {
-        if (max < vertex)
+        if (max < vertex[i])
         {
-            max = vertex;
+            max = vertex[i];
             ver = i;
         }
         return i;
@@ -230,12 +314,21 @@ int main()
     gnode *graph[n];
     read_vertices_at_once(graph, n);
 
-    printf("DFS topo traversal off graph is\n");
+    printf("DFS topo traversal of graph is\n");
     DFS_toposort(graph, n);
     while (top != -1)
     {
         printf("%d ", pop());
     }
-    printf("%d vertex has highest Outgoing Edge\n",highest_outgoing_edge);
-    printf("%d Vertex has highest Incoming Edges\n", highest_incoming_edge);
+    printf("\n\n");
+    printf("DFS visit of Graph is :->\n");
+    DFS(graph, n);
+    printf("\n\n");
+    print_edge(graph, n);
+    printf("Breadth First Search :-->");
+    BFS(graph,n);
+    printf("\n\n");
+    printf("vertex %d has highest Outgoing Edge\n", highest_outgoing_edge(graph, n));
+    printf("vertex %d has Max no of Edge\n", highest_outgoing_edge(graph, n));
+    printf("Vertex %d has highest Incoming Edges\n", highest_incoming_edge(graph, n));
 }

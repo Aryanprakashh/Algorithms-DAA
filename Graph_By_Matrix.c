@@ -98,8 +98,8 @@ int main()
     // taking input of Adjmat
     read_graph(n, Adjmat);
     Display_graph(n, Adjmat);
-    printf("%d \n", vertex_having_highest_outgoing_edge(Adjmat, n));
-    printf("%d \n",vertex_having_no_OutgoingEdge(Adjmat,n));
+    printf("vertex_having_highest_outgoing_edge :%d \n", vertex_having_highest_outgoing_edge(Adjmat, n));
+    printf("vertex_having_no_OutgoingEdge :%d \n",vertex_having_no_OutgoingEdge(Adjmat,n));
 
 }
 //

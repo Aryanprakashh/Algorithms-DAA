@@ -9,7 +9,6 @@ typedef struct node {
 
 node* newNode(int value){
     node *temp=(node*)malloc(sizeof(node));
-    scanf("%d",&value);
     temp->key=value;
     temp->left=temp->right=NULL;
     return temp;
@@ -49,8 +48,8 @@ node *minvalue(struct node *node)
 
 int main(){
     // newNode();
+
     node* root=NULL;
-    // printf("Enter any key to continue\n");
     root=insert(root,12);
     root=insert(root,2);
     root=insert(root,41);

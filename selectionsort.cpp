@@ -36,6 +36,7 @@ int main()
     }
     selectionsort(arr, n);
     // printing array
+    cout<<"Array After Sorting-->\n";
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";

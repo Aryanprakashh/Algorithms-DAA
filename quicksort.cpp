@@ -45,6 +45,7 @@ int main()
         cin >> arr[i];
     }
     quicksort(arr, 0, n - 1);
+    cout<<"Array After Sorting-->\n";
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";

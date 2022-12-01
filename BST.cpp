@@ -6,11 +6,12 @@ struct node
 {
     int data;
     struct node *left, *right;
-}*root;
+};
+
 
 struct node *search(struct node *root, int key)
 {
-    // if root is null or key is present at root nodee
+    // if root is null or key is present at root node
     if (root == NULL || root->data == key)
     {
         return root;
@@ -44,12 +45,13 @@ struct node *insert(struct node *node, int value)
         node->right = insert(node->right, value);
     return node;
 }
+
 void inorder(struct node *root)
 {
     if (root != NULL)
     {
         inorder(root->left);
-        cout<<root->data;
+        cout<<root->data<<" ";
         inorder(root->right);
     }
 }
@@ -95,11 +97,11 @@ struct node *deletenode(struct node *node, int key)
 }
 int main()
 {
-    // struct node* root=NULL;
-    insert(root,10);
-    insert(root,35);
-    insert(root,73);
-    insert(root,11);
-    insert(root,112);
+    struct node* root=NULL;
+    root=insert(root,10);
+    root=insert(root,35);
+    root=insert(root,73);
+    root=insert(root,11);
+    root=insert(root,112);
     inorder(root);
 }
